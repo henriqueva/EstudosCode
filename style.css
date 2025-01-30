@@ -4,10 +4,10 @@
     font-family: "DM sans", sans-serif;
     margin: 0;
     padding: 0;
-    /* height: 100vh; */
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
+}
+
+body {
+    display: flex;
 }
 
 .header {
@@ -16,13 +16,11 @@
     margin: 16px;
     padding: 8px;
     width: 128px;
-    /* align-items: center; */
     border-radius: 8px;
 }
 
 .header .minha__foto {
     width: 128px;
-   /* margin-right: 16px; */
     border-radius: 8px;
 }
 
@@ -39,6 +37,21 @@
     font-size: 12px;
 }
 
+main {
+    /* display: flex; */
+    width: 100vw;
+    margin-right: 16px;
+    /* background-color: blue; */
+}
+
+main .conteudo {
+    background-color: #121212;
+    padding: 16px;
+    margin: 16px 0 0 0;
+    border-radius: 8px;
+    padding: 12px;
+}
+
 footer {
     position: fixed;
     bottom: 0;
@@ -46,7 +59,7 @@ footer {
     right: 0;
     background-color: #121212;
     margin: 16px;
-    padding: 15px 16px;
+    padding: 16px 16px;
     border-radius: 8px;
     display: flex;
     justify-content: space-between;
