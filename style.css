@@ -12,24 +12,61 @@
 
 .header {
     display: flex;
+    background-color: #121212;
     margin: 16px;
-    width: 300px;
-    align-items: center;
-}
-
-.minha__foto {
+    padding: 8px;
     width: 128px;
-    margin-right: 16px;
+    /* align-items: center; */
     border-radius: 8px;
-
 }
 
+.header .minha__foto {
+    width: 128px;
+   /* margin-right: 16px; */
+    border-radius: 8px;
+}
+
+.header div{
+    background-color: #121212;
+}
 .header .name {
-    padding-bottom: 8px;
+    padding:8px 0 8px 0;
     font-size: 16px;
 }
 
 .header .title {
     padding: 0 0 4px 8px;
     font-size: 12px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #121212;
+    margin: 16px;
+    padding: 15px 16px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer div {
+    background-color: #121212;
+    align-items: center;
+}
+
+footer img {
+    background-color: #121212;
+    width: 16px;
+}
+
+footer a {
+    background-color: #121212;
+    text-decoration: none;
+}
+
+footer span {
+    background-color: #121212;
 }
