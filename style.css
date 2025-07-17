@@ -1,7 +1,8 @@
 * {
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0);
     color:aliceblue;
     font-family: "DM sans", sans-serif;
+    line-height: 1.5;
     margin: 0;
     padding: 0;
 }
@@ -13,7 +14,7 @@ body {
 .header {
     display: flex;
     background-color: #121212;
-    margin: 16px;
+    margin: 16px 16px 46px 16px;
     padding: 8px;
     width: 128px;
     border-radius: 8px;
@@ -37,6 +38,31 @@ body {
     font-size: 12px;
 }
 
+.header .links {
+    background-color: #121212;
+    align-items: center;
+    margin: 0 0 0 8px;
+}
+
+.header .social {
+    background-color: #121212;
+    width: 16px;
+}
+
+.header a {
+    background-color: #121212;
+    text-decoration: none;
+    margin: 0 0 8px 0;
+}
+
+.header span {
+    background-color: #121212;
+}
+
+.header .by {
+    font-size: 12px;
+}
+
 main {
     /* display: flex; */
     width: 100vw;
@@ -50,6 +76,14 @@ main .conteudo {
     margin: 16px 0 0 0;
     border-radius: 8px;
     padding: 12px;
+}
+
+main .end__conteudo {
+    /* background-color: #121212; */
+    /* padding: 16px; */
+    margin: 0 0 0 0;
+    /* border-radius: 8px; */
+    /* padding: 12px; */
 }
 
 footer {
