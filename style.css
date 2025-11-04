@@ -1,7 +1,7 @@
 :root {
     --gap: 16px;
     --sidebar-w: 140px; /* ajuste aqui a largura da barra lateral */
-    --card-bg: rgba(18,18,18,0.7);
+    --card-bg: rgba(15,18,28,0.7);
 }
 
 /* Reset geral que você já tinha, mantive a intenção */
