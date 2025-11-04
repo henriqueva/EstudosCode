@@ -1,119 +1,178 @@
+:root {
+    --gap: 16px;
+    --sidebar-w: 140px; /* ajuste aqui a largura da barra lateral */
+    --card-bg: rgba(18,18,18,0.7);
+}
+
+/* Reset geral que você já tinha, mantive a intenção */
 * {
     background-color: rgba(0, 0, 0, 0);
-    color:aliceblue;
+    color: aliceblue;
     font-family: "DM sans", sans-serif;
     line-height: 1.5;
     margin: 0;
     padding: 0;
 }
 
+/* O body fica sem scroll; quem rola é o main */
+html, body {
+    height: 100%;
+}
 body {
-    display: flex;
+    display: block;           /* não precisamos do flex aqui por causa do header fixo */
+    overflow: hidden;         /* evita scroll no body */
+    background: #0b0b0b;      /* fundo da página */
 }
 
+/* === SIDEBAR FIXA (header) — header na cor das divs do main === */
 .header {
-    display: flex;
-    background-color: #121212;
-    margin: 16px 16px 46px 16px;
+    position: fixed;
+    z-index: 10;
+    left: var(--gap);
+    top: var(--gap);
+    bottom: var(--gap);
+    width: var(--sidebar-w);
+    background-color: var(--card-bg); /* mesma cor das divs do main */
+    border-radius: 8px;
     padding: 8px;
-    width: 128px;
-    border-radius: 8px;
+    overflow-y: auto;         /* rolagem própria da lateral */
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 8px 24px rgba(0,0,0,0.4);
 }
 
+/* Conteúdo do header */
 .header .minha__foto {
-    width: 128px;
+    width: 100%;
     border-radius: 8px;
+    display: block;
 }
 
-.header div{
-    background-color: #121212;
+/* ✅ todos os fundos internos do header ficam transparentes */
+.header div,
+.header .links,
+.header .social,
+.header a,
+.header span {
+    background-color: transparent;
 }
+
 .header .name {
-    padding:8px 0 8px 0;
-    font-size: 16px;
+    padding: 8px 0;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .header .title {
-    padding: 0 0 4px 8px;
+    padding: 0 0 4px 4px;
     font-size: 12px;
+    opacity: 0.85;
 }
 
 .header .links {
-    background-color: #121212;
-    align-items: center;
-    margin: 0 0 0 8px;
+    margin: 8px 0 0 4px;
 }
 
 .header .social {
-    background-color: #121212;
     width: 16px;
+    vertical-align: -3px;
+    margin-right: 6px;
 }
 
 .header a {
-    background-color: #121212;
     text-decoration: none;
-    margin: 0 0 8px 0;
+    margin: 0 0 10px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.95;
 }
-
-.header span {
-    background-color: #121212;
-}
+.header a:hover { opacity: 1; }
 
 .header .by {
     font-size: 12px;
+    opacity: 0.7;
 }
 
+/* === ÁREA QUE ROLA (main) === */
 main {
-    /* display: flex; */
-    width: 100vw;
-    margin-right: 16px;
-    /* background-color: blue; */
+    /* desloca o main para a direita da sidebar fixa */
+    margin-left: calc(var(--sidebar-w) + var(--gap) * 2);
+    /* respeita as margens superior e direita da página */
+    padding: var(--gap);
+    padding-right: calc(var(--gap) + 8px);
+    height: 100vh;        /* ocupa a janela toda */
+    overflow-y: auto;     /* aqui é onde rola */
 }
 
 main .conteudo {
-    background-color: #121212;
-    padding: 16px;
-    margin: 16px 0 0 0;
+    background-color: var(--card-bg);
     border-radius: 8px;
     padding: 12px;
+    margin: 16px 0 0 0;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 4px 14px rgba(0,0,0,0.35);
 }
 
 main .end__conteudo {
-    /* background-color: #121212; */
-    /* padding: 16px; */
-    margin: 0 0 0 0;
-    /* border-radius: 8px; */
-    /* padding: 12px; */
+    margin: 0;
 }
 
+/* Rodapé opcional (se quiser usá-lo fixo dentro do main, com sticky) */
 footer {
-    position: fixed;
+    position: sticky;     /* gruda no fim do main */
     bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #121212;
-    margin: 16px;
-    padding: 16px 16px;
+    background-color: var(--card-bg);
+    margin: var(--gap) 0 0 0;
+    padding: 16px;
     border-radius: 8px;
     display: flex;
     justify-content: space-between;
 }
-
-footer div {
-    background-color: #121212;
-    align-items: center;
-}
-
-footer img {
-    background-color: #121212;
-    width: 16px;
-}
-
-footer a {
-    background-color: #121212;
-    text-decoration: none;
-}
-
+/* ✅ itens internos do footer não repintam o fundo */
+footer div,
+footer img,
+footer a,
 footer span {
-    background-color: #121212;
+    background-color: transparent;
+}
+footer img { width: 16px; }
+footer a { text-decoration: none; }
+
+/* === RESPONSIVO: em telas estreitas, a sidebar vira topo fixo === */
+@media (max-width: 900px) {
+    :root { --sidebar-w: 100vw; }
+
+    .header {
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: auto;
+        width: auto;
+        height: auto;
+        max-height: 40vh;   /* se a lateral (agora topo) ficar grande, permite rolagem */
+        margin: 0;
+        border-radius: 0 0 8px 8px;
+    }
+
+    main {
+        margin-left: 0;
+        margin-top: calc(var(--gap) + 200px); /* espaço reservado para o header fixo no topo */
+        /* você pode ajustar esse valor caso seu header fique mais alto/baixo */
+        padding: var(--gap);
+        height: calc(100vh - calc(var(--gap) + 200px));
+    }
+}
+
+/* === FUNDO FIXO COM 20% === */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("./img/b.png"); /* caminho da sua imagem */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.2; /* 20% de visibilidade */
+    z-index: -1;  /* fica atrás de tudo */
 }
