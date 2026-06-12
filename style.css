@@ -1,167 +1,37 @@
 :root {
-    --gap: 16px;
-    --sidebar-w: 140px; /* ajuste aqui a largura da barra lateral */
-    --card-bg: rgba(15,18,28,0.7);
+    --gap: 20px;
+    --sidebar-w: 200px;
+    --card-bg: rgba(13, 16, 26, 0.55);
+    --glass-blur: blur(16px);
+    --border-light: rgba(255, 255, 255, 0.05);
+    --border-hover: rgba(255, 255, 255, 0.12);
+    --accent-color: #7952b3; /* Cor moderna de destaque */
+    --accent-blue: #0076ff;
+    --text-primary: #f8f9fa;
+    --text-secondary: #adb5bd;
+    --font-title: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
 }
 
-/* Reset geral que você já tinha, mantive a intenção */
+/* Reset Geral */
 * {
-    background-color: rgba(0, 0, 0, 0);
-    color: aliceblue;
-    font-family: "DM sans", sans-serif;
-    line-height: 1.5;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* O body fica sem scroll; quem rola é o main */
 html, body {
     height: 100%;
-}
-body {
-    display: block;           /* não precisamos do flex aqui por causa do header fixo */
-    overflow: hidden;         /* evita scroll no body */
-    background: #0b0b0b;      /* fundo da página */
-}
-
-/* === SIDEBAR FIXA (header) — header na cor das divs do main === */
-.header {
-    position: fixed;
-    z-index: 10;
-    left: var(--gap);
-    top: var(--gap);
-    bottom: var(--gap);
-    width: var(--sidebar-w);
-    background-color: var(--card-bg); /* mesma cor das divs do main */
-    border-radius: 8px;
-    padding: 8px;
-    overflow-y: auto;         /* rolagem própria da lateral */
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 8px 24px rgba(0,0,0,0.4);
+    background-color: #050508;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow: hidden; /* O main gerencia o scroll */
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Conteúdo do header */
-.header .minha__foto {
-    width: 100%;
-    border-radius: 8px;
-    display: block;
-}
-
-/* ✅ todos os fundos internos do header ficam transparentes */
-.header div,
-.header .links,
-.header .social,
-.header a,
-.header span {
-    background-color: transparent;
-}
-
-.header .name {
-    padding: 8px 0;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.header .title {
-    padding: 0 0 4px 4px;
-    font-size: 12px;
-    opacity: 0.85;
-}
-
-.header .links {
-    margin: 8px 0 0 4px;
-}
-
-.header .social {
-    width: 16px;
-    vertical-align: -3px;
-    margin-right: 6px;
-}
-
-.header a {
-    text-decoration: none;
-    margin: 0 0 10px 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    opacity: 0.95;
-}
-.header a:hover { opacity: 1; }
-
-.header .by {
-    font-size: 12px;
-    opacity: 0.7;
-}
-
-/* === ÁREA QUE ROLA (main) === */
-main {
-    /* desloca o main para a direita da sidebar fixa */
-    margin-left: calc(var(--sidebar-w) + var(--gap) * 2);
-    /* respeita as margens superior e direita da página */
-    padding: var(--gap);
-    padding-right: calc(var(--gap) + 8px);
-    height: 100vh;        /* ocupa a janela toda */
-    overflow-y: auto;     /* aqui é onde rola */
-}
-
-main .conteudo {
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    padding: 12px;
-    margin: 16px 0 0 0;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 4px 14px rgba(0,0,0,0.35);
-}
-
-main .end__conteudo {
-    margin: 0;
-}
-
-/* Rodapé opcional (se quiser usá-lo fixo dentro do main, com sticky) */
-footer {
-    position: sticky;     /* gruda no fim do main */
-    bottom: 0;
-    background-color: var(--card-bg);
-    margin: var(--gap) 0 0 0;
-    padding: 16px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-}
-/* ✅ itens internos do footer não repintam o fundo */
-footer div,
-footer img,
-footer a,
-footer span {
-    background-color: transparent;
-}
-footer img { width: 16px; }
-footer a { text-decoration: none; }
-
-/* === RESPONSIVO: em telas estreitas, a sidebar vira topo fixo === */
-@media (max-width: 900px) {
-    :root { --sidebar-w: 100vw; }
-
-    .header {
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: auto;
-        width: auto;
-        height: auto;
-        max-height: 40vh;   /* se a lateral (agora topo) ficar grande, permite rolagem */
-        margin: 0;
-        border-radius: 0 0 8px 8px;
-    }
-
-    main {
-        margin-left: 0;
-        margin-top: calc(var(--gap) + 200px); /* espaço reservado para o header fixo no topo */
-        /* você pode ajustar esse valor caso seu header fique mais alto/baixo */
-        padding: var(--gap);
-        height: calc(100vh - calc(var(--gap) + 200px));
-    }
-}
-
-/* === FUNDO FIXO COM 20% === */
+/* Imagem de fundo com opacidade e filtros de blur sutis no background */
 body::before {
     content: "";
     position: fixed;
@@ -169,10 +39,608 @@ body::before {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url("./img/b.png"); /* caminho da sua imagem */
+    background-image: url("./img/b.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.2; /* 20% de visibilidade */
-    z-index: -1;  /* fica atrás de tudo */
+    opacity: 0.15;
+    z-index: -1;
+    filter: saturate(1.2);
+}
+
+/* === SIDEBAR FIXA (Header) === */
+.header {
+    position: fixed;
+    z-index: 10;
+    left: var(--gap);
+    top: var(--gap);
+    bottom: var(--gap);
+    width: var(--sidebar-w);
+    background-color: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 16px;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 12px rgba(255, 255, 255, 0.02);
+}
+
+/* Foto do perfil */
+.header .minha__foto {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    margin-bottom: 16px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header:hover .minha__foto {
+    transform: scale(1.02);
+}
+
+/* Informações Pessoais */
+.header .name {
+    font-family: var(--font-title);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+
+.header .title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    border-left: 2px solid var(--accent-blue);
+    padding-left: 6px;
+}
+
+/* Links Sociais */
+.header .links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.header a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.header a:hover {
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: var(--border-hover);
+    transform: translateX(4px);
+}
+
+.header .social {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.header a:hover .social {
+    transform: scale(1.1);
+}
+
+.header .by {
+    font-size: 10px;
+    color: var(--text-secondary);
+    opacity: 0.5;
+    text-align: center;
+    margin-top: 24px;
+    display: block;
+    letter-spacing: 1px;
+}
+
+/* === MAIN (ÁREA QUE ROLA) === */
+main {
+    margin-left: calc(var(--sidebar-w) + var(--gap) * 2);
+    padding: var(--gap);
+    padding-right: calc(var(--gap) + 4px);
+    height: 100vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+main .conteudo {
+    background-color: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+main .conteudo:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+main h2 {
+    font-family: var(--font-title);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Formatação do Texto do Main */
+main .conteudo b {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+main .conteudo blockquote {
+    border-left: 3px solid var(--accent-blue);
+    padding-left: 10px;
+    margin: 10px 0;
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+/* === SLOT MACHINE DEMO === */
+.slot-machine-container {
+    background: rgba(10, 12, 22, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 440px;
+    margin: 0;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6), 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Painel de Jackpot */
+.slot-jackpot-panel {
+    text-align: center;
+    background: rgba(255, 184, 0, 0.04);
+    border: 1px dashed rgba(255, 184, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    animation: goldGlow 3s infinite alternate;
+}
+
+.jackpot-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #ffb800;
+    letter-spacing: 2px;
+    display: block;
+}
+
+.jackpot-value {
+    font-family: var(--font-title);
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffb800;
+    text-shadow: 0 0 10px rgba(255, 184, 0, 0.5);
+    margin-top: 2px;
+}
+
+/* Reels Wrapper */
+.slot-reels-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    background: #06080e;
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9);
+}
+
+.slot-reel {
+    width: 80px;
+    height: 80px;
+    background: rgba(15, 18, 28, 0.95);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.reel-strip {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+}
+
+.reel-symbol {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.reel-symbol.blur {
+    filter: blur(2px) opacity(0.8);
+}
+
+/* Controles */
+.slot-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.slot-info-box {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 6px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-label {
+    font-size: 8px;
+    color: var(--text-secondary);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-family: var(--font-title);
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-top: 1px;
+}
+
+/* Botão Girar */
+.spin-btn {
+    flex: 1.2;
+    background: linear-gradient(135deg, #0076ff 0%, #5d5dff 100%);
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: var(--font-title);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(93, 93, 255, 0.3);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+}
+
+.spin-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(93, 93, 255, 0.45);
+    background: linear-gradient(135deg, #0081ff 0%, #6868ff 100%);
+}
+
+.spin-btn:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(93, 93, 255, 0.2);
+}
+
+.spin-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: none;
+}
+
+/* Status Message */
+.slot-status-message {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    min-height: 20px;
+}
+
+.slot-status-message.win {
+    color: #00ff88;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+    animation: textPulse 0.4s ease infinite alternate;
+}
+
+.slot-status-message.spin {
+    color: #0076ff;
+}
+
+@keyframes goldGlow {
+    from { box-shadow: 0 0 4px rgba(255, 184, 0, 0.05); }
+    to { box-shadow: 0 0 12px rgba(255, 184, 0, 0.2); }
+}
+
+@keyframes textPulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.04); }
+}
+
+/* === SLOT DEMO WRAPPER (SIDE-BY-SIDE NO DESKTOP) === */
+.slot-demo-wrapper {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Fluxograma Container */
+.fsm-flowchart-container {
+    background: rgba(10, 12, 22, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 20px;
+    width: 100%;
+    max-width: 320px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6), 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.fsm-flowchart-title {
+    font-family: var(--font-title);
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--accent-blue);
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+.fsm-flowchart-desc {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.fsm-flow-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+/* Nós FSM */
+.fsm-node {
+    background: rgba(20, 24, 38, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 10px 14px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.fsm-node-title {
+    font-family: var(--font-title);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.fsm-node-status {
+    font-size: 9px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+/* Nós Ativos */
+.fsm-node.active {
+    background: rgba(0, 118, 255, 0.08);
+    border-color: #0076ff;
+    box-shadow: 0 0 16px rgba(0, 118, 255, 0.45);
+    transform: scale(1.03);
+}
+
+/* Efeito especial para o nó de resultado se for uma vitória */
+.fsm-node.active#node-result {
+    background: rgba(0, 255, 136, 0.08);
+    border-color: #00ff88;
+    box-shadow: 0 0 16px rgba(0, 255, 136, 0.45);
+}
+
+/* Setas de fluxo */
+.fsm-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2px 0;
+}
+
+.fsm-arrow-line {
+    width: 2px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    position: relative;
+}
+
+.fsm-arrow-text {
+    font-size: 8px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+    margin: 2px 0;
+}
+
+.fsm-arrow-head {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Estilos de seta loop-back */
+.fsm-arrow.loop-back .fsm-arrow-line {
+    border-style: dashed;
+    background: transparent;
+}
+.fsm-arrow.loop-back .fsm-arrow-head {
+    border-top-style: dashed;
+    border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Estilos de seta ativa quando o nó de origem está rodando */
+.fsm-node.active + .fsm-arrow .fsm-arrow-line {
+    background: #0076ff;
+    animation: flowPulse 1.5s infinite;
+}
+.fsm-node.active + .fsm-arrow .fsm-arrow-head {
+    border-top-color: #0076ff;
+}
+.fsm-node.active + .fsm-arrow .fsm-arrow-text {
+    color: #0076ff;
+}
+
+@keyframes flowPulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+}
+
+/* Espaço extra no final */
+.end__conteudo {
+    height: 40px;
+}
+
+/* Customização de Scrollbars */
+main::-webkit-scrollbar, .header::-webkit-scrollbar {
+    width: 6px;
+}
+
+main::-webkit-scrollbar-track, .header::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+main::-webkit-scrollbar-thumb, .header::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+}
+
+main::-webkit-scrollbar-thumb:hover, .header::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* === RESPONSIVIDADE (Telas menores de 900px) === */
+@media (max-width: 900px) {
+    body {
+        overflow-y: auto; /* Permite rolar o body inteiro no mobile */
+    }
+
+    .header {
+        position: relative;
+        width: auto;
+        left: 0;
+        top: 0;
+        margin: var(--gap);
+        height: auto;
+        max-height: none;
+        border-radius: 12px;
+    }
+
+    .header .minha__foto {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        float: left;
+        margin-right: 16px;
+        margin-bottom: 0;
+        object-fit: cover;
+    }
+
+    .header .name {
+        margin-top: 8px;
+    }
+
+    .header .title {
+        margin-bottom: 12px;
+    }
+
+    .header .links {
+        clear: both;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    .header a {
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+
+    .header .by {
+        display: none;
+    }
+
+    main {
+        margin-left: 0;
+        height: auto;
+        overflow-y: visible;
+        padding-top: 0;
+    }
+
+    /* Ajuste responsivo para o Demo da Slot Machine + FSM Flowchart */
+    .slot-demo-wrapper {
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+    }
+
+    .fsm-flowchart-container {
+        max-width: 440px; /* Alinha com a largura do slot machine */
+    }
 }
